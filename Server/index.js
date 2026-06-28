@@ -7,11 +7,18 @@ const authRoutes = require('./Routes/auth')
 const cookieParser = require('cookie-parser')
 
 const PORT = process.env.PORT
-
+app.set('trust proxy', 1)
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: [
+        'https://gofresh-market.netlify.app',
+        'http://localhost:5173'
+    ],
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.options('*', cors()) // Enable pre-flight for all routes
 
 app.use(express.json())
 app.use(cookieParser());
