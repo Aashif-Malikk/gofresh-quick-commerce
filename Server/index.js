@@ -1,13 +1,14 @@
 require('dotenv').config()
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const ConnectDB = require('./MongoConnect/db')
-const authRoutes = require('./Routes/auth')
+const express      = require('express')
+const cors         = require('cors')
 const cookieParser = require('cookie-parser')
+const ConnectDB    = require('./MongoConnect/db')
+const authRoutes   = require('./Routes/auth')
 
-const PORT = process.env.PORT
+const app = express()
+
 app.set('trust proxy', 1)
+
 app.use(cors({
     origin: [
         'https://gofresh-market.netlify.app',
@@ -16,18 +17,25 @@ app.use(cors({
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+}))
 
-app.options('*', cors()) // Enable pre-flight for all routes
+// ✅ Removed app.options('(.*)', cors()) — not needed
 
 app.use(express.json())
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use('/', authRoutes)
-// console.log(ipconfig.address())
+
+const PORT = process.env.PORT || 3000   // ✅ fallback port
 
 ConnectDB()
     .then(() => {
+        console.log('✅ MongoDB connected')
         app.listen(PORT, () => {
-            console.log(`Server was running on http://localhost:${PORT}`);
+            console.log(`✅ Server running on port ${PORT}`)
         })
+    })
+    .catch((err) => {
+        console.error('❌ MongoDB connection failed:', err.message)
+        process.exit(1)   // ✅ exit so Render shows the real error
     })
