@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import AdminNav from "../AdminNav";
 import AdminSidebar from "../Side Bar/AdminSidebar";
-const API_BASE = 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 function AdminRoute() {
     const [res, setres] = useState({ status: null });

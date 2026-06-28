@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, CloseCircle } from 'iconsax-react'
 import Loader from '../Loader/Loader'
-const API_BASE = 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 
 function VendorAddProducts() {

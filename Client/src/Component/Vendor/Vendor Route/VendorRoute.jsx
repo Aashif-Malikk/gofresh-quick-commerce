@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import VendorSidebar from '../Side bar/VendorSidebar'
 import VendorNav from '../VendorNav';
-const API_BASE = 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 
 function VendorRoute() {
