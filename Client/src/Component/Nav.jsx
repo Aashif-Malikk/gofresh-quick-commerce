@@ -12,7 +12,7 @@ function Nav() {
     const [isLocationInput, setIsLocationInput] = useState(false)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
-    const [searchTerm, setSearchTerm] = useState('')
+    // const [searchTerm, setSearchTerm] = useState('')
 
     const locationRef = useRef(null)
     const userMenuRef = useRef(null)
@@ -21,7 +21,9 @@ function Nav() {
     const openAuthModal = useStore(s => s.openAuthModal)
     const isUserData = useStore(s => s.isUserData)
     const cartItemId = useStore(s => s.cartItemId)
-
+    const searchTerm = useStore(s => s.searchTerm)
+    const setSearchTerm = useStore(s => s.setSearchTerm)
+    
     // ── Fetch user data ─────────────────────────────────────────
     useEffect(() => {
         const fetchUserData = async () => {

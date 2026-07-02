@@ -19,14 +19,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
-// ✅ Removed app.options('(.*)', cors()) — not needed
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use('/', authRoutes)
 
-const PORT = process.env.PORT || 3000   // ✅ fallback port
+const PORT = process.env.PORT || 3000   
 
 ConnectDB()
     .then(() => {
@@ -37,5 +36,5 @@ ConnectDB()
     })
     .catch((err) => {
         console.error('❌ MongoDB connection failed:', err.message)
-        process.exit(1)   // ✅ exit so Render shows the real error
+        process.exit(1) 
     })

@@ -1,19 +1,21 @@
 import { create } from "zustand";
 
 const useStore = create((set) => ({
-  showAuthModal: false,
-  isUserData: false,
+    showAuthModal: false,
+    isUserData: false,
+    searchTerm: '',
+    setSearchTerm: (term) => set({ searchTerm: term }),
 
-  isUserDataModel: () =>
-    set({ isUserData: true }),
+    isUserDataModel: () =>
+        set({ isUserData: true }),
 
-  openAuthModal: () =>
-    set({ showAuthModal: true }),
+    openAuthModal: () =>
+        set({ showAuthModal: true }),
 
-  closeAuthModal: () =>
-    set({ showAuthModal: false }),
+    closeAuthModal: () =>
+        set({ showAuthModal: false }),
 
-  cartItemId: [],
+    cartItemId: [],
     quantities: {},  // { productId: count }
 
     setCartItemId: (ids) => set({ cartItemId: ids }),
